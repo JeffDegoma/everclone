@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Clear docker volumes
           command: |
-            docker volume rm $(docker volume ls -q)
+            docker version
 
       - run:
           name: Start container and verify it's working
