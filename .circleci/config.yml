@@ -24,10 +24,10 @@ workflows:
     jobs:
     - build
     - aws-ecr/build-and-push-image:
+        repo: docker_images #ecr repository name
         steps:
         - push-image:
           account-url: ${AWS_ECR_ACCOUNT_URL}
-          repo: docker_images #ecr repository name
           tag: "v0.1.${CIRCLE_BUILD_NUM}"
         requires:
           - build
