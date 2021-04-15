@@ -24,6 +24,7 @@ jobs:
           name: Clear docker volumes
           command: |
             docker volume rm $(docker volume ls -q)
+
       - run:
           name: Start container and verify it's working
           command: |
