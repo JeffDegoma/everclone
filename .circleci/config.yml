@@ -25,7 +25,7 @@ jobs:
           name: Install Docker client
           command: |
             yum install -y tar
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-19.03.13-ce.tgz
+            curl -L -o /tmp/docker-19.03.13-ce.tgz https://get.docker.com/builds/Linux/x86_64/docker-19.03.13-ce.tgz
             tar -xz -C /tmp -f /tmp/docker-19.03.13-ce.tgz
             mv /tmp/docker/* /usr/bin
 
