@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Start container and verify it's working
           command: |
-            docker-compose -f docker-compose.yml -d up --build
+            docker-compose -f docker-compose.yml up --build -d
   
 workflows:
   node-tests:
