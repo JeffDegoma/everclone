@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: amazon/aws-cli
+      - image: cimg/base:2021.04
         # entrypoint: /bin/bash
     working_directory: ~/project
     steps:
