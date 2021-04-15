@@ -21,6 +21,10 @@ jobs:
           version: 19.03.13
 
       - run:
+          name: Clear docker volumes
+          command: |
+            docker volume rm $(docker volume ls -q)
+      - run:
           name: Start container and verify it's working
           command: |
             docker-compose -f docker-compose.yml up --build -d
