@@ -17,6 +17,7 @@ jobs:
           name: Start container and verify it's working
           command: |
             docker-compose -f docker-compose.yml up --build -d
+            docker ps -a
       # docker tag
 
   
@@ -28,6 +29,7 @@ workflows:
         repo: docker_images #ecr repository name
         account-url: AWS_ECR_ACCOUNT_URL
         dockerfile: frontend/Dockerfile
+        path: .
         tag: "v0.1.${CIRCLE_BUILD_NUM}"
         requires:
           - build
