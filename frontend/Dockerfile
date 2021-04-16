@@ -2,8 +2,8 @@ FROM node:12-alpine as builder
 
 WORKDIR /usr/local/app
 
-COPY ./frontend/package.*json ./
-COPY .front/end/yarn.lock ./
+COPY package.*json ./
+COPY yarn.lock ./
 
 COPY . ./
 
