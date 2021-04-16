@@ -20,7 +20,7 @@ jobs:
             docker ps -a
       # docker tag
   ecr-login:
-    executor: default
+    executor: machine
     steps:
       - aws-ecr/ecr-login:
           account-url: AWS_ECR_ACCOUNT_URL
