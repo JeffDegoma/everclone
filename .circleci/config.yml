@@ -31,7 +31,7 @@ jobs:
       - aws-ecr/push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           repo: docker_images
-          tag: project_server
+          tag: project_server:latest
       # - run:
       #     name: Tag api
       #     command: |
