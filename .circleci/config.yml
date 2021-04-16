@@ -16,8 +16,8 @@ jobs:
       - run:
           name: Start container and verify it's working
           command: |
-            docker-compose -f docker-compose.yml up --build -d
-            docker images ls
+            docker-compose -f docker-compose.yml up --build -d server
+            docker images
       # docker tag both builds
       # - run:
       #     name: Tag api
@@ -31,7 +31,7 @@ jobs:
       - aws-ecr/push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           repo: docker_images
-          tag: project_server
+          tag: latest
       # - run:
       #     name: Tag api
       #     command: |
