@@ -20,17 +20,12 @@ jobs:
             docker ps -a
       # docker tag
 
-  
+
 workflows:
   node-tests:
     jobs:
-    - build
     - aws-ecr/build-and-push-image:
-        repo: docker_images #ecr repository name
-        account-url: AWS_ECR_ACCOUNT_URL
-        dockerfile: frontend/Dockerfile
-        path: ./frontend
-        tag: "v0.1.${CIRCLE_BUILD_NUM}"
-        requires:
-          - build
-      
+        repo: AWS_ECR_ACCOUNT_URL
+        steps:
+          - aws-ecr/ecr-login
+    - build
