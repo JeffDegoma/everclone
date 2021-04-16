@@ -19,13 +19,14 @@ jobs:
             docker-compose -f docker-compose.yml up --build -d
             docker ps -a
       # docker tag
-
+  ecr-login:
+    executor: default
+    steps:
+      - aws-ecr/ecr-login:
+          account_url: AWS_ECR_ACCOUNT_URL
 
 workflows:
   node-tests:
     jobs:
-    - ecr-login:
-        steps:
-          - aws-ecr/ecr-login:
-              account_url: AWS_ECR_ACCOUNT_URL
+    - ecr-login
     - build
