@@ -17,7 +17,7 @@ jobs:
           name: Start container and verify it's working
           command: |
             docker-compose -f docker-compose.yml up --build -d server
-            docker tag project_server ${AWS_ECR_ACCOUNT_URL}:docker_images:project_server
+            docker tag project_server ${AWS_ECR_ACCOUNT_URL}/docker_images:project_server
       # docker tag both builds
       # - run:
       #     name: Tag api
