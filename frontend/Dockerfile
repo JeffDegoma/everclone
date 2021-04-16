@@ -2,7 +2,7 @@ FROM node:12-alpine as builder
 
 WORKDIR /usr/local/app
 
-COPY package.*json yarn.lock ./
+COPY ./package.*json ./yarn.lock ./
 
 COPY . ./
 
