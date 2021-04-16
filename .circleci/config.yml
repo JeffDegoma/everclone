@@ -6,11 +6,11 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/base:2021.04 # docker client and docker compose pre-installed
     working_directory: ~/project
     steps:
       - checkout
-      - setup_remote_docker:
+      - setup_remote_docker: # docker server 
           version: 19.03.13
       - aws-ecr/ecr-login
       - run:
@@ -18,9 +18,25 @@ jobs:
           command: |
             docker-compose -f docker-compose.yml up --build -d
             docker ps -a
-      # docker tag
+      # docker tag both builds
+      - run:
+          name: Tag api
+          command: |
+            docker tag project_server AWS_ECR_ACCOUNT_URL/docker_images:project_server
+      - run:
+          name: Tag client
+          command: |
+            docker tag project_client AWS_ECR_ACCOUNT_URL/docker_images:project_
+      # docker push to ECR
+      - aws-ecr/push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: docker_images
+          tag: project_server
+      # - run:
+      #     name: Tag client
+      #     command: |
+      #       docker tag project_client AWS_ECR_ACCOUNT_URL/docker_images:project_
 
-  
 
 
 workflows:
