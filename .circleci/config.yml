@@ -28,10 +28,10 @@ jobs:
       #     command: |
       #       docker tag project_client AWS_ECR_ACCOUNT_URL/docker_images:project_
       # docker push to ECR
-      # - aws-ecr/push-image:
-      #     account-url: AWS_ECR_ACCOUNT_URL
-      #     repo: docker_images
-      #     tag: project_server
+      - aws-ecr/push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: docker_images
+          tag: project_server
       # - run:
       #     name: Tag api
       #     command: |
