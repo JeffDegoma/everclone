@@ -7,7 +7,6 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.04
-        # entrypoint: /bin/bash
     working_directory: ~/project
     steps:
       - checkout
@@ -19,14 +18,15 @@ jobs:
             docker-compose -f docker-compose.yml up --build -d
             docker ps -a
       # docker tag
-  ecr-login:
-    executor: machine
-    steps:
-      - aws-ecr/ecr-login:
-          account-url: AWS_ECR_ACCOUNT_URL
 
 workflows:
   node-tests:
     jobs:
-    - ecr-login
     - build
+  ecr-login:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          repo: docker_images
+          steps:
+            - aws-ecr/ecr-login:
+              account-url: AWS_ECR_ACCOUNT_URL
