@@ -23,7 +23,7 @@ jobs:
     executor: default
     steps:
       - aws-ecr/ecr-login:
-          account_url: AWS_ECR_ACCOUNT_URL
+          account-url: AWS_ECR_ACCOUNT_URL
 
 workflows:
   node-tests:
