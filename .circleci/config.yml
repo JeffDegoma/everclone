@@ -13,11 +13,12 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-
       - run:
           name: Start container and verify it's working
           command: |
             docker-compose -f docker-compose.yml up --build -d
+      # docker tag
+
   
 workflows:
   node-tests:
@@ -25,10 +26,9 @@ workflows:
     - build
     - aws-ecr/build-and-push-image:
         repo: docker_images #ecr repository name
-        steps:
-        - push-image:
-          account-url: ${AWS_ECR_ACCOUNT_URL}
-          tag: "v0.1.${CIRCLE_BUILD_NUM}"
+        account-url: ${AWS_ECR_ACCOUNT_URL}
+        dockerfile: frontend/Dockerfile
+        tag: "v0.1.${CIRCLE_BUILD_NUM}"
         requires:
           - build
       
