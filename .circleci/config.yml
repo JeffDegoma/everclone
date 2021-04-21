@@ -14,30 +14,24 @@ jobs:
           version: 19.03.13
       - aws-ecr/ecr-login
       - run:
-          name: Start container and verify it's working
+          name: Build server
           command: |
             docker-compose -f docker-compose.yml up --build -d server
             docker tag project_server ${AWS_ECR_ACCOUNT_URL}/docker_images:project_server
-      # docker tag both builds
-      # - run:
-      #     name: Tag api
-      #     command: |
-      #       docker tag project_server AWS_ECR_ACCOUNT_URL/docker_images:project_server
-      # - run:
-      #     name: Tag client
-      #     command: |
-      #       docker tag project_client AWS_ECR_ACCOUNT_URL/docker_images:project_
+      - run:
+          name: Build client
+          command: |
+            docker-compose -f docker-compose.yml up --build -d client
+            docker tag project_client ${AWS_ECR_ACCOUNT_URL}/docker_images:project_client
       # docker push to ECR
       - aws-ecr/push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           repo: docker_images
           tag: project_server
-      # - run:
-      #     name: Tag api
-      #     command: |
-      #       docker tag project_server AWS_ECR_ACCOUNT_URL/docker_images:project_server
-
-
+      - aws-ecr/push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: docker_images
+          tag: project_client
 
 workflows:
   node-tests:
